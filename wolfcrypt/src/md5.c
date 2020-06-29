@@ -299,6 +299,10 @@ static int _InitMd5(wc_Md5* md5)
     md5->digest[2] = 0x98badcfeL;
     md5->digest[3] = 0x10325476L;
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    XMEMSET(md5->buffer, 0, sizeof(md5->buffer));
+#endif
+
     md5->buffLen = 0;
     md5->loLen   = 0;
     md5->hiLen   = 0;
