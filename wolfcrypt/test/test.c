@@ -690,14 +690,14 @@ initDefaultName();
         test_pass("SHA-384  test passed!\n");
 #endif
 
-#endif /* __TRUSTINSOFT_ANALYZER__ */
-
 #ifdef WOLFSSL_SHA512
     if ( (ret = sha512_test()) != 0)
         return err_sys("SHA-512  test failed!\n", ret);
     else
         test_pass("SHA-512  test passed!\n");
 #endif
+
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 #ifdef WOLFSSL_SHA3
     if ( (ret = sha3_test()) != 0)
