@@ -19201,7 +19201,7 @@ int GetCipherSuiteFromName(const char* name, byte* cipherSuite0,
     int           i;
     unsigned long len;
     const char*   nameDelim;
-    
+
     /* Support trailing : */
     nameDelim = XSTRSTR(name, ":");
     if (nameDelim)
@@ -19330,7 +19330,11 @@ int SetCipherList(WOLFSSL_CTX* ctx, Suites* suites, const char* list)
             }
         }
     }
+#ifdef __TRUSTINSOFT_ANALYZER__
+    while (next != NULL && next++); /* ++ needed to skip ':' */
+#else /* __TRUSTINSOFT_ANALYZER__ */
     while (next++); /* ++ needed to skip ':' */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
     if (ret) {
         int keySz = 0;
