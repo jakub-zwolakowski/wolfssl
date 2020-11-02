@@ -358,3 +358,13 @@ IDE/XCODE/Index
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
+
+# TrustInSoft CI
+*.c_config.json
+*.c_functions.csv
+*.c_time.txt
+*.c_variables.csv
+tis_config.json*
+tis_symbols.tbl
+__vfs-*.h
+__vfs-*.c

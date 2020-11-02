@@ -79,6 +79,10 @@ static int InitSha256(wc_Sha256* sha256)
     sha256->digest[6] = 0x1F83D9ABL;
     sha256->digest[7] = 0x5BE0CD19L;
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    XMEMSET(sha256->buffer, 0, sizeof(sha256->buffer));
+#endif
+
     sha256->buffLen = 0;
     sha256->loLen   = 0;
     sha256->hiLen   = 0;
@@ -1422,6 +1426,10 @@ int wc_Sha256Copy(wc_Sha256* src, wc_Sha256* dst)
         sha224->digest[5] = 0x68581511;
         sha224->digest[6] = 0x64f98fa7;
         sha224->digest[7] = 0xbefa4fa4;
+
+    #ifdef __TRUSTINSOFT_ANALYZER__
+        XMEMSET(sha224->buffer, 0, sizeof(sha224->buffer));
+    #endif
 
         sha224->buffLen = 0;
         sha224->loLen   = 0;
