@@ -32077,7 +32077,9 @@ void ApiTest(void)
     test_wolfSSL_CTX_use_certificate_file();
     AssertIntEQ(test_wolfSSL_CTX_use_certificate_buffer(), WOLFSSL_SUCCESS);
     test_wolfSSL_CTX_use_PrivateKey_file();
+#ifndef __TRUSTINSOFT_ANALYZER__
     test_wolfSSL_CTX_load_verify_locations();
+#endif /* __TRUSTINSOFT_ANALYZER__ */
     test_wolfSSL_CertManagerLoadCABuffer();
     test_wolfSSL_CertManagerGetCerts();
     test_wolfSSL_CertManagerSetVerify();
