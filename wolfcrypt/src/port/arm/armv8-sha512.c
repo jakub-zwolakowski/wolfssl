@@ -58,6 +58,10 @@ static int InitSha512(wc_Sha512* sha512)
     sha512->digest[6] = W64LIT(0x1f83d9abfb41bd6b);
     sha512->digest[7] = W64LIT(0x5be0cd19137e2179);
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    XMEMSET(sha512->buffer, 0, sizeof(sha512->buffer));
+#endif
+
     sha512->buffLen = 0;
     sha512->loLen   = 0;
     sha512->hiLen   = 0;
@@ -500,6 +504,10 @@ static int InitSha384(wc_Sha384* sha384)
     sha384->digest[5] = W64LIT(0x8eb44a8768581511);
     sha384->digest[6] = W64LIT(0xdb0c2e0d64f98fa7);
     sha384->digest[7] = W64LIT(0x47b5481dbefa4fa4);
+
+#ifdef __TRUSTINSOFT_ANALYZER__
+    XMEMSET(sha384->buffer, 0, sizeof(sha384->buffer));
+#endif
 
     sha384->buffLen = 0;
     sha384->loLen   = 0;

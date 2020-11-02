@@ -228,6 +228,10 @@
     #endif
         wolfSSL_CryptHwMutexUnLock();
 
+    #ifdef __TRUSTINSOFT_ANALYZER__
+        XMEMSET(sha->buffer, 0, sizeof(sha->buffer));
+    #endif
+
         sha->buffLen = 0;
         sha->loLen   = 0;
         sha->hiLen   = 0;
@@ -304,6 +308,10 @@
         sha->digest[3] = 0x10325476L;
         sha->digest[4] = 0xC3D2E1F0L;
 
+    #ifdef __TRUSTINSOFT_ANALYZER__
+        XMEMSET(sha->buffer, 0, sizeof(sha->buffer));
+    #endif
+
         sha->buffLen = 0;
         sha->loLen   = 0;
         sha->hiLen   = 0;
@@ -341,6 +349,10 @@
         sha->digest[2] = 0x98BADCFEL;
         sha->digest[3] = 0x10325476L;
         sha->digest[4] = 0xC3D2E1F0L;
+
+    #ifdef __TRUSTINSOFT_ANALYZER__
+        XMEMSET(sha->buffer, 0, sizeof(sha->buffer));
+    #endif
 
         sha->buffLen = 0;
         sha->loLen   = 0;

@@ -602,6 +602,8 @@ initDefaultName();
         test_pass("CAVP selftest passed!\n");
 #endif
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* Exclude the separated tests. */
+
     if ( (ret = error_test()) != 0)
         return err_sys("error    test failed!\n", ret);
     else
@@ -694,6 +696,8 @@ initDefaultName();
     else
         test_pass("SHA-512  test passed!\n");
 #endif
+
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 #ifdef WOLFSSL_SHA3
     if ( (ret = sha3_test()) != 0)

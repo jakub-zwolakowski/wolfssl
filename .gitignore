@@ -335,3 +335,13 @@ IDE/XCODE/Index
 /IDE/Renesas/e2studio/Projects/test/trash
 /IDE/Renesas/e2studio/Projects/test/*.launch
 /IDE/Renesas/e2studio/Projects/test/*.scfg
+
+# TrustInSoft CI
+*.c_config.json
+*.c_functions.csv
+*.c_time.txt
+*.c_variables.csv
+tis_config.json*
+tis_symbols.tbl
+__vfs-*.h
+__vfs-*.c

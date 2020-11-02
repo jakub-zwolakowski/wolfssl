@@ -51,6 +51,10 @@ int wc_InitRipeMd(RipeMd* ripemd)
     ripemd->digest[3] = 0x10325476L;
     ripemd->digest[4] = 0xC3D2E1F0L;
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    XMEMSET(ripemd->buffer, 0, sizeof(ripemd->buffer));
+#endif
+
     ripemd->buffLen = 0;
     ripemd->loLen   = 0;
     ripemd->hiLen   = 0;

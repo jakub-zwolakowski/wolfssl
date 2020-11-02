@@ -44,6 +44,10 @@ void wc_InitMd4(Md4* md4)
     md4->digest[2] = 0x98badcfeL;
     md4->digest[3] = 0x10325476L;
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    XMEMSET(md4->buffer, 0, sizeof(md4->buffer));
+#endif
+
     md4->buffLen = 0;
     md4->loLen   = 0;
     md4->hiLen   = 0;
