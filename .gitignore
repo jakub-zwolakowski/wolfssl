@@ -344,5 +344,5 @@ IDE/XCODE/Index
 tis_config.json_generated
 tis_config.json_generated.json
 tis_symbols.tbl
-__vfs-tis*.h
-__vfs-tis*.c
+__vfs-*.h
+__vfs-*.c
