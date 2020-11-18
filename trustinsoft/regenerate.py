@@ -120,6 +120,32 @@ with open(common_config_path, "w") as file:
     print("2. Generate the '%s' file." % common_config_path)
     file.write(tis.string_of_json(common_config))
 
+
+# ---------------------------------------------------------------------------- #
+# ------------------ GENERATE trustinsoft/<machdep>.config ------------------- #
+# ---------------------------------------------------------------------------- #
+
+machdeps = [
+    "gcc_x86_32",
+    "gcc_x86_64",
+    "gcc_ppc_64",
+]
+
+def make_machdep_config(machdep):
+    return (
+        {
+            "machdep": machdep,
+        }
+    )
+
+print("3. Generate 'trustinsoft/<machdep>.config' files...")
+machdep_configs = map(make_machdep_config, machdeps)
+for machdep_config in machdep_configs:
+    file = path.join("trustinsoft", "%s.config" % machdep_config["machdep"])
+    with open(file, "w") as f:
+        print("   > Generate the '%s' file." % file)
+        f.write(tis.string_of_json(machdep_config))
+
 # --------------------------------------------------------------------------- #
 # -------------------------------- tis.config ------------------------------- #
 # --------------------------------------------------------------------------- #
