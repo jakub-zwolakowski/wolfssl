@@ -368,3 +368,4 @@ tis_config.json*
 tis_symbols.tbl
 __vfs-*.h
 __vfs-*.c
+tis.cpython-*.pyc
