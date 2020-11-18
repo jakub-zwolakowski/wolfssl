@@ -45,6 +45,9 @@ extern "C" {
 #undef  HAVE_AESGCM
 #define HAVE_AESGCM
 
+#undef  WOLFSSL_MD2
+#define WOLFSSL_MD2
+
 #undef  WOLFSSL_SHA512
 #define WOLFSSL_SHA512
 
