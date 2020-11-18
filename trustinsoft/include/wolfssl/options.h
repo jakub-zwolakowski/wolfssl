@@ -57,6 +57,9 @@ extern "C" {
 #undef  HAVE_HKDF
 #define HAVE_HKDF
 
+#undef  HAVE_X963_KDF
+#define HAVE_X963_KDF
+
 #undef  NO_DSA
 #define NO_DSA
 
@@ -77,9 +80,6 @@ extern "C" {
 
 #undef  WOLFSSL_BASE16
 #define WOLFSSL_BASE16
-
-#undef  NO_RC4
-#define NO_RC4
 
 #undef  NO_HC128
 #define NO_HC128
@@ -117,17 +117,11 @@ extern "C" {
 #undef  HAVE_EXTENDED_MASTER
 #define HAVE_EXTENDED_MASTER
 
-#undef  NO_RC4
-#define NO_RC4
-
 #undef  HAVE_ENCRYPT_THEN_MAC
 #define HAVE_ENCRYPT_THEN_MAC
 
 #undef  NO_PSK
 #define NO_PSK
-
-#undef  NO_MD4
-#define NO_MD4
 
 #undef  NO_PWDBASED
 #define NO_PWDBASED
