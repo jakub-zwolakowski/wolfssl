@@ -144,9 +144,6 @@ extern "C" {
 #undef  HAVE___UINT128_T
 #define HAVE___UINT128_T 1
 
-#undef  HAVE_WC_INTROSPECTION
-#define HAVE_WC_INTROSPECTION
-
 
 #ifdef __cplusplus
 }

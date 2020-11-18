@@ -9,12 +9,29 @@ import tis
 
 import re # sub
 import json # dumps, load
-from os import path # basename, isdir, join
+import os # makedirs
+from os import path # path.basename, path.isdir, path.join
 import glob # iglob
 from itertools import product  # Cartesian product of lists.
+import shutil # copyfileobj
 
 # Directories.
 common_config_path = path.join("trustinsoft", "common.config")
+include_dir = path.join("trustinsoft", "include")
+
+# Generated files which need to be a part of the repository.
+def make_simple_copy_file(src_path):
+    return (
+        {
+            "src": src_path,
+            "dst": path.join(include_dir, src_path),
+        }
+    )
+
+files_to_copy = [
+    make_simple_copy_file("config.h"),
+    make_simple_copy_file(path.join("wolfssl", "options.h")),
+]
 
 # --------------------------------------------------------------------------- #
 # ---------------------------------- CHECKS --------------------------------- #
@@ -23,6 +40,8 @@ common_config_path = path.join("trustinsoft", "common.config")
 # Initial check.
 print("1. Check if all necessary directories and files exist...")
 tis.check_dir("trustinsoft")
+for file in files_to_copy:
+    tis.check_file(file['src'])
 
 # --------------------------------------------------------------------------- #
 # -------------------- GENERATE trustinsoft/common.config ------------------- #
@@ -191,3 +210,16 @@ tis_config = list(map(
 with open("tis.config", "w") as file:
     print("4. Generate the 'tis.config' file.")
     file.write(tis.string_of_json(tis_config))
+
+
+# --------------------------------------------------------------------------- #
+# ------------------------------ COPY .h FILES ------------------------------ #
+# --------------------------------------------------------------------------- #
+
+print("5. Copy generated files.")
+for file in files_to_copy:
+    with open(file['src'], 'r') as f_src:
+        os.makedirs(path.dirname(file['dst']), exist_ok=True)
+        with open(file['dst'], 'w') as f_dst:
+            print("   > Copy '%s' to '%s'." % (file['src'], file['dst']))
+            shutil.copyfileobj(f_src, f_dst)
