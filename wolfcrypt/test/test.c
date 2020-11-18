@@ -1830,6 +1830,7 @@ static int md5_test(void)
             ERROR_OUT(-1607 - i, exit);
     }
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
     const char* large_digest =
@@ -1854,6 +1855,7 @@ static int md5_test(void)
     if (XMEMCMP(hash, large_digest, WC_MD5_DIGEST_SIZE) != 0)
         ERROR_OUT(-1610, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
 
@@ -2025,6 +2027,7 @@ static int sha_test(void)
             ERROR_OUT(-1807 - i, exit);
     }
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
 #ifdef WOLFSSL_RENESAS_TSIP
@@ -2059,6 +2062,7 @@ static int sha_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA_DIGEST_SIZE) != 0)
         ERROR_OUT(-1810, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
 
@@ -2415,6 +2419,7 @@ static int sha256_test(void)
             ERROR_OUT(-2307 - i, exit);
     }
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
 #ifdef WOLFSSL_RENESAS_TSIP_CRYPT
@@ -2449,6 +2454,7 @@ static int sha256_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA256_DIGEST_SIZE) != 0)
         ERROR_OUT(-2310, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
 
@@ -2535,6 +2541,7 @@ static int sha512_test(void)
             ERROR_OUT(-2407 - i, exit);
     }
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
     const char* large_digest =
@@ -2559,6 +2566,7 @@ static int sha512_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA512_DIGEST_SIZE) != 0)
         ERROR_OUT(-2410, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
     wc_Sha512Free(&sha);
@@ -2642,6 +2650,7 @@ static int sha384_test(void)
             ERROR_OUT(-2507 - i, exit);
     }
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
     const char* large_digest =
@@ -2665,6 +2674,7 @@ static int sha384_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA384_DIGEST_SIZE) != 0)
         ERROR_OUT(-2510, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
 
@@ -2732,6 +2742,7 @@ static int sha3_224_test(void)
             ERROR_OUT(-2605 - i, exit);
     }
 
+    #ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
     const char* large_digest =
@@ -2754,6 +2765,7 @@ static int sha3_224_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA3_224_DIGEST_SIZE) != 0)
         ERROR_OUT(-2608, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
     wc_Sha3_224_Free(&sha);
@@ -2833,6 +2845,7 @@ static int sha3_256_test(void)
             ERROR_OUT(-2705 - i, exit);
     }
 
+    #ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     for (i = 0; i < (int)sizeof(large_input); i++) {
         large_input[i] = (byte)(i & 0xFF);
@@ -2850,6 +2863,7 @@ static int sha3_256_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA3_256_DIGEST_SIZE) != 0)
         ERROR_OUT(-2708, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
     /* this is a software only variant of SHA3 not supported by external hardware devices */
 #if defined(WOLFSSL_HASH_FLAGS) && !defined(WOLFSSL_ASYNC_CRYPT)
@@ -2961,6 +2975,7 @@ static int sha3_384_test(void)
     #endif
     }
 
+    #ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
     const char* large_digest =
@@ -2984,6 +2999,7 @@ static int sha3_384_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA3_384_DIGEST_SIZE) != 0)
         ERROR_OUT(-2808, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
     wc_Sha3_384_Free(&sha);
@@ -3057,6 +3073,7 @@ static int sha3_512_test(void)
             ERROR_OUT(-2905 - i, exit);
     }
 
+    #ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     byte large_input[1024];
     const char* large_digest =
@@ -3081,6 +3098,7 @@ static int sha3_512_test(void)
     if (XMEMCMP(hash, large_digest, WC_SHA3_512_DIGEST_SIZE) != 0)
         ERROR_OUT(-2908, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
     wc_Sha3_512_Free(&sha);
@@ -3196,6 +3214,7 @@ static int shake256_test(void)
             ERROR_OUT(-3103 - i, exit);
     }
 
+    #ifndef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
     /* BEGIN LARGE HASH TEST */ {
     for (i = 0; i < (int)sizeof(large_input); i++) {
         large_input[i] = (byte)(i & 0xFF);
@@ -3213,6 +3232,7 @@ static int shake256_test(void)
     if (XMEMCMP(hash, large_digest, sizeof(hash)) != 0)
         ERROR_OUT(-3106, exit);
     } /* END LARGE HASH TEST */
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
 exit:
     wc_Shake256_Free(&sha);
