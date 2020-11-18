@@ -15,6 +15,10 @@ import glob # iglob
 from itertools import product  # Cartesian product of lists.
 import shutil # copyfileobj
 
+# --------------------------------------------------------------------------- #
+# -------------------------------- SETTINGS --------------------------------- #
+# --------------------------------------------------------------------------- #
+
 # Directories.
 common_config_path = path.join("trustinsoft", "common.config")
 include_dir = path.join("trustinsoft", "include")
@@ -32,6 +36,13 @@ files_to_copy = [
     make_simple_copy_file("config.h"),
     make_simple_copy_file(path.join("wolfssl", "options.h")),
 ]
+
+# Random file length.
+urandom_filename = "urandom"
+urandom_length = 4096
+
+# Null file.
+null_filename = "null"
 
 # --------------------------------------------------------------------------- #
 # ---------------------------------- CHECKS --------------------------------- #
@@ -103,11 +114,11 @@ def make_common_config():
         [
             {
                 "name": path.join("/", "dev", "urandom"),
-                "from": "urandom_1",
+                "from": urandom_filename,
             },
             {
                 "name": path.join("/", "dev", "null"),
-                "from": "null_1",
+                "from": null_filename,
             }
         ]
     )
@@ -223,3 +234,15 @@ for file in files_to_copy:
         with open(file['dst'], 'w') as f_dst:
             print("   > Copy '%s' to '%s'." % (file['src'], file['dst']))
             shutil.copyfileobj(f_src, f_dst)
+
+# --------------------------------------------------------------------------- #
+# ---------------------------- PREP OTHER FILES  ---------------------------- #
+# --------------------------------------------------------------------------- #
+
+print("5. Prepare other files.")
+with open(path.join("trustinsoft", urandom_filename), 'wb') as file:
+    print("   > Create the 'trustinsoft/%s' file." % urandom_filename)
+    file.write(os.urandom(urandom_length))
+with open(path.join("trustinsoft", null_filename), 'wb') as file:
+    print("   > Create the 'trustinsoft/%s' file." % null_filename)
+    file.truncate()
