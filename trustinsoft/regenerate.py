@@ -11,6 +11,7 @@ import re # sub
 import json # dumps, load
 from os import path # basename, isdir, join
 import glob # iglob
+from itertools import product  # Cartesian product of lists.
 
 # Directories.
 common_config_path = path.join("trustinsoft", "common.config")
@@ -147,10 +148,46 @@ for machdep_config in machdep_configs:
         f.write(tis.string_of_json(machdep_config))
 
 # --------------------------------------------------------------------------- #
-# -------------------------------- tis.config ------------------------------- #
+# --------------------------- GENERATE tis.config --------------------------- #
 # --------------------------------------------------------------------------- #
 
-# tis_config = ()
-# with open("tis.config", "w") as file:
-#     print("4. Generate the 'tis.config' file.")
-#     file.write(string_of_json(tis_config))
+tests = [
+    "error_test",
+    "base64_test",
+    "asn_test",
+    "random_test",
+    "md5_test",
+    "sha_test",
+    "sha224_test",
+    "sha256_test",
+    "sha384_test",
+    "sha512_test",
+    "main"
+]
+
+machdep_names = {
+    "gcc_x86_32": "little endian 32-bit (x86)",
+    "gcc_x86_64": "little endian 64-bit (x86)",
+    "gcc_ppc_64": "big endian 64-bit (PPC64)",
+}
+
+def make_test(test_name, machdep):
+    return (
+        {
+            "include": common_config_path,
+            "compilation_database": [
+                "compile_commands.json"
+            ],
+            "include_": path.join("trustinsoft", "%s.config" % machdep),
+            "main": test_name,
+            "name": "'%s' from 'wolfcrypt/test/test.c' %s" % (test_name, machdep_names[machdep])
+        }
+    )
+
+tis_config = list(map(
+    lambda t: make_test(t[0], t[1]),
+    product(tests, machdeps)
+))
+with open("tis.config", "w") as file:
+    print("4. Generate the 'tis.config' file.")
+    file.write(tis.string_of_json(tis_config))
