@@ -72,6 +72,9 @@ extern "C" {
 #undef  WOLFSSL_BASE64_ENCODE
 #define WOLFSSL_BASE64_ENCODE
 
+#undef  WOLFSSL_BASE16
+#define WOLFSSL_BASE16
+
 #undef  NO_RC4
 #define NO_RC4
 
