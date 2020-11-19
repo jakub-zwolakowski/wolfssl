@@ -45,6 +45,12 @@ extern "C" {
 #undef  HAVE_AESGCM
 #define HAVE_AESGCM
 
+#undef  HAVE_AESCCM
+#define HAVE_AESCCM
+
+#undef  HAVE_CAMELLIA
+#define HAVE_CAMELLIA
+
 #undef  WOLFSSL_MD2
 #define WOLFSSL_MD2
 
@@ -81,11 +87,20 @@ extern "C" {
 #undef  WOLFSSL_BASE16
 #define WOLFSSL_BASE16
 
+#undef  WOLFSSL_CMAC
+#define WOLFSSL_CMAC
+
+#undef  WOLFSSL_AES_DIRECT
+#define WOLFSSL_AES_DIRECT
+
 #undef  NO_HC128
 #define NO_HC128
 
-#undef  NO_RABBIT
-#define NO_RABBIT
+#undef  HAVE_RABBIT
+#define HAVE_RABBIT
+
+#undef  WC_RC2
+#define WC_RC2
 
 #undef  WOLFSSL_SHA224
 #define WOLFSSL_SHA224
@@ -104,6 +119,9 @@ extern "C" {
 
 #undef  HAVE_CHACHA
 #define HAVE_CHACHA
+
+#undef  HAVE_XCHACHA
+#define HAVE_XCHACHA
 
 #undef  HAVE_HASHDRBG
 #define HAVE_HASHDRBG
@@ -135,11 +153,14 @@ extern "C" {
 #undef  WC_NO_ASYNC_THREADING
 #define WC_NO_ASYNC_THREADING
 
+#undef  HAVE_AES_KEYWRAP
+#define HAVE_AES_KEYWRAP
+
+#undef  WOLFSSL_AES_DIRECT
+#define WOLFSSL_AES_DIRECT
+
 #undef  HAVE_DH_DEFAULT_PARAMS
 #define HAVE_DH_DEFAULT_PARAMS
-
-#undef  NO_DES3
-#define NO_DES3
 
 #undef  HAVE___UINT128_T
 #define HAVE___UINT128_T 1
