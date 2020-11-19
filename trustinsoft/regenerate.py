@@ -58,6 +58,7 @@ machdeps = [
 # Initial check.
 print("1. Check if all necessary directories and files exist...")
 tis.check_dir("trustinsoft")
+tis.check_file("compile_commands.json")
 for file in files_to_copy:
     tis.check_file(file['src'])
 
@@ -110,32 +111,58 @@ def make_common_config():
             lambda file: path.join("..", "wolfcrypt", "src", file),
             [
                 "aes.c",
+                "arc4.c",
                 "asn.c",
+                "blake2b.c",
+                "blake2s.c",
+                "camellia.c",
                 "chacha.c",
                 "chacha20_poly1305.c",
+                "cmac.c",
                 "coding.c",
+                "cryptocb.c",
+                "curve25519.c",
+                "curve448.c",
+                "des3.c",
+                "dh.c",
+                "dsa.c",
+                "ecc_fp.c",
                 "ecc.c",
+                "ed25519.c",
+                "ed448.c",
                 "error.c",
+                "evp.c",
+                "fe_448.c",
+                "fe_low_mem.c",
+                "fe_operations.c",
                 "hash.c",
+                "hc128.c",
                 "hmac.c",
+                "idea.c",
+                "integer.c",
+                "md2.c",
+                "md4.c",
                 "md5.c",
                 "memory.c",
+                # "misc.c", #warning misc.c does not need to be compiled when using inline (NO_INLINE not defined)
+                "pkcs12.c",
                 "poly1305.c",
+                "pwdbased.c",
+                "rabbit.c",
                 "random.c",
+                "rc2.c",
+                "ripemd.c",
                 "rsa.c",
                 "sha.c",
                 "sha256.c",
                 "sha3.c",
                 "sha512.c",
+                "signature.c",
                 "tfm.c",
+                "wc_dsp.c",
                 "wc_encrypt.c",
+                "wc_pkcs11.c",
                 "wc_port.c",
-                "arc4.c",
-                "rc2.c",
-                "rabbit.c",
-                "des3.c",
-                "cmac.c",
-                "camellia.c",
             ]))
     )
     # Filesystem.
