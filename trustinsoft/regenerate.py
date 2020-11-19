@@ -114,7 +114,7 @@ def make_common_config():
                 "arc4.c",
                 "asm.c",
                 "asn.c",
-                "async.c",
+                # "async.c", # Generated, empty.
                 "blake2b.c",
                 "blake2s.c",
                 "camellia.c",
@@ -139,8 +139,8 @@ def make_common_config():
                 "fe_448.c",
                 "fe_low_mem.c",
                 "fe_operations.c",
-                "fips_test.c",
-                "fips.c",
+                # "fips_test.c", # Generated.
+                # "fips.c", # Generated.
                 "ge_448.c",
                 "ge_low_mem.c",
                 "ge_operations.c",
@@ -164,7 +164,7 @@ def make_common_config():
                 "rc2.c",
                 "ripemd.c",
                 "rsa.c",
-                "selftest.c",
+                # "selftest.c", # Generated.
                 "sha.c",
                 "sha256.c",
                 "sha3.c",
@@ -184,8 +184,8 @@ def make_common_config():
                 "wc_encrypt.c",
                 "wc_pkcs11.c",
                 "wc_port.c",
-                "wolfcrypt_first.c",
-                "wolfcrypt_last.c",
+                # "wolfcrypt_first.c", # Generated.
+                # "wolfcrypt_last.c", # Generated.
                 "wolfevent.c",
                 "wolfmath.c",
             ]))
