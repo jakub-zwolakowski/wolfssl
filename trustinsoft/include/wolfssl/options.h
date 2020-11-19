@@ -54,6 +54,9 @@ extern "C" {
 #undef  WOLFSSL_MD2
 #define WOLFSSL_MD2
 
+#undef  WOLFSSL_RIPEMD
+#define WOLFSSL_RIPEMD
+
 #undef  WOLFSSL_SHA512
 #define WOLFSSL_SHA512
 
@@ -77,6 +80,12 @@ extern "C" {
 
 #undef  ECC_SHAMIR
 #define ECC_SHAMIR
+
+#undef  HAVE_CURVE25519
+#define HAVE_CURVE25519
+
+#undef  HAVE_ECC_ENCRYPT
+#define HAVE_ECC_ENCRYPT
 
 #undef  WC_RSA_PSS
 #define WC_RSA_PSS
@@ -135,14 +144,17 @@ extern "C" {
 #undef  HAVE_EXTENDED_MASTER
 #define HAVE_EXTENDED_MASTER
 
+#undef  WOLFCRYPT_HAVE_SRP
+#define WOLFCRYPT_HAVE_SRP
+
 #undef  HAVE_ENCRYPT_THEN_MAC
 #define HAVE_ENCRYPT_THEN_MAC
 
 #undef  NO_PSK
 #define NO_PSK
 
-#undef  NO_PWDBASED
-#define NO_PWDBASED
+#undef  HAVE_SCRYPT
+#define HAVE_SCRYPT
 
 #undef  USE_FAST_MATH
 #define USE_FAST_MATH

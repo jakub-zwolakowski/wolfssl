@@ -130,6 +130,12 @@ def make_common_config():
                 "tfm.c",
                 "wc_encrypt.c",
                 "wc_port.c",
+                "arc4.c",
+                "rc2.c",
+                "rabbit.c",
+                "des3.c",
+                "cmac.c",
+                "camellia.c",
             ]))
     )
     # Filesystem.
