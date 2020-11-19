@@ -65,6 +65,35 @@ for file in files_to_copy:
 # -------------------- GENERATE trustinsoft/common.config ------------------- #
 # --------------------------------------------------------------------------- #
 
+def options_of_compile_command_json(compile_commands_path,
+                                    options={"-D":[], "-U":[], "-I":[]}):
+    D = set(options["-D"])
+    U = set(options["-U"])
+    I = set(options["-I"])
+    with open(compile_commands_path, "r") as file:
+        compile_commands = json.load(file)
+        for entry in compile_commands:
+            dir = path.relpath(entry["directory"])
+            full_dir = path.join(
+                dir,
+                path.dirname(entry["file"])
+            )
+            for argument in entry["arguments"]:
+                prefix = argument[0:2]
+                value = argument[2:]
+                if prefix == "-D":
+                    D.add(value)
+                elif prefix == "-U":
+                    U.add(value)
+                elif prefix == "-I":
+                    I.add(path.normpath(path.join("..", dir, value)))
+                    I.add(path.normpath(path.join("..", full_dir, value)))
+    return {
+        "-D": sorted(list(D)),
+        "-I": sorted(list(I)),
+        "-U": sorted(list(U)),
+    }
+
 def make_common_config():
     # C files.
     c_files = (
@@ -130,7 +159,7 @@ def make_common_config():
         ]
     )
     # Compilation options.
-    compilation_cmd = (
+    my_options = (
         {
             "-I": [
                 "include",
@@ -142,6 +171,8 @@ def make_common_config():
             "-U": [],
         }
     )
+    compilation_cmd = options_of_compile_command_json("compile_commands.json",
+                                                      my_options)
     # Whole common.config JSON.
     config = (
         {
@@ -217,9 +248,9 @@ tests = [
     "rabbit",
     "chacha",
     "XChaCha",
-    "chacha20_poly1305_aead",
-    "XChaCha20Poly1305",
-    "des",
+    "chacha20_poly1305_aead", # ?
+    "XChaCha20Poly1305", # ?
+    "des", # ?
     "des3",
     "aes",
     "aes192",
@@ -229,7 +260,7 @@ tests = [
     "poly1305",
     "aesgcm",
     "aesgcm_default",
-    "gmac",
+    "gmac", # ?
     "aesccm",
     "aeskeywrap",
     "camellia",
@@ -286,9 +317,9 @@ def make_test(test_name, machdep):
     return (
         {
             "include": common_config_path,
-            "compilation_database": [
-                "compile_commands.json"
-            ],
+            # "compilation_database": [
+            #     "compile_commands.json"
+            # ],
             "include_": path.join("trustinsoft", "%s.config" % machdep),
             "main": "%s_test" % test_name,
             "name": "%s test, %s" % (test_name, machdep_names[machdep])
