@@ -84,6 +84,15 @@ extern "C" {
 #undef  HAVE_CURVE25519
 #define HAVE_CURVE25519
 
+#undef  HAVE_ED25519
+#define HAVE_ED25519
+
+#undef  HAVE_CURVE448
+#define HAVE_CURVE448
+
+#undef  HAVE_ED448
+#define HAVE_ED448
+
 #undef  HAVE_ECC_ENCRYPT
 #define HAVE_ECC_ENCRYPT
 
