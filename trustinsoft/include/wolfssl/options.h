@@ -27,11 +27,47 @@ extern "C" {
 #undef  HAVE_FFDHE_2048
 #define HAVE_FFDHE_2048
 
+#undef  WOLFSSL_SEP
+#define WOLFSSL_SEP
+
+#undef  KEEP_PEER_CERT
+#define KEEP_PEER_CERT
+
 #undef  SINGLE_THREADED
 #define SINGLE_THREADED
 
+#undef  WOLFSSL_MULTI_ATTRIB
+#define WOLFSSL_MULTI_ATTRIB
+
 #undef  HAVE_THREAD_LS
 #define HAVE_THREAD_LS
+
+#undef  HAVE_AES_DECRYPT
+#define HAVE_AES_DECRYPT
+
+#undef  HAVE_AES_ECB
+#define HAVE_AES_ECB
+
+#undef  WOLFSSL_ALT_NAMES
+#define WOLFSSL_ALT_NAMES
+
+#undef  WOLFSSL_DER_LOAD
+#define WOLFSSL_DER_LOAD
+
+#undef  HAVE_FFDHE_2048
+#define HAVE_FFDHE_2048
+
+#undef  HAVE_FFDHE_3072
+#define HAVE_FFDHE_3072
+
+#undef  FP_MAX_BITS
+#define FP_MAX_BITS 8192
+
+#undef  WOLFSSL_VALIDATE_ECC_KEYGEN
+#define WOLFSSL_VALIDATE_ECC_KEYGEN
+
+#undef  WOLFSSL_VALIDATE_ECC_IMPORT
+#define WOLFSSL_VALIDATE_ECC_IMPORT
 
 #undef  TFM_TIMING_RESISTANT
 #define TFM_TIMING_RESISTANT
@@ -42,11 +78,32 @@ extern "C" {
 #undef  WC_RSA_BLINDING
 #define WC_RSA_BLINDING
 
+#undef  ATOMIC_USER
+#define ATOMIC_USER
+
+#undef  HAVE_PK_CALLBACKS
+#define HAVE_PK_CALLBACKS
+
 #undef  HAVE_AESGCM
 #define HAVE_AESGCM
 
 #undef  HAVE_AESCCM
 #define HAVE_AESCCM
+
+#undef  WOLFSSL_AES_COUNTER
+#define WOLFSSL_AES_COUNTER
+
+#undef  WOLFSSL_AES_DIRECT
+#define WOLFSSL_AES_DIRECT
+
+#undef  WOLFSSL_AES_OFB
+#define WOLFSSL_AES_OFB
+
+#undef  WOLFSSL_AES_DIRECT
+#define WOLFSSL_AES_DIRECT
+
+#undef  WOLFSSL_AES_CFB
+#define WOLFSSL_AES_CFB
 
 #undef  HAVE_CAMELLIA
 #define HAVE_CAMELLIA
@@ -54,8 +111,20 @@ extern "C" {
 #undef  WOLFSSL_MD2
 #define WOLFSSL_MD2
 
+#undef  HAVE_NULL_CIPHER
+#define HAVE_NULL_CIPHER
+
 #undef  WOLFSSL_RIPEMD
 #define WOLFSSL_RIPEMD
+
+#undef  HAVE_BLAKE2
+#define HAVE_BLAKE2
+
+#undef  HAVE_BLAKE2B
+#define HAVE_BLAKE2B
+
+#undef  HAVE_BLAKE2S
+#define HAVE_BLAKE2S
 
 #undef  WOLFSSL_SHA512
 #define WOLFSSL_SHA512
@@ -63,14 +132,26 @@ extern "C" {
 #undef  WOLFSSL_SHA384
 #define WOLFSSL_SHA384
 
+#undef  SESSION_CERTS
+#define SESSION_CERTS
+
+#undef  WOLFSSL_KEY_GEN
+#define WOLFSSL_KEY_GEN
+
+#undef  WOLFSSL_CERT_GEN
+#define WOLFSSL_CERT_GEN
+
+#undef  WOLFSSL_CERT_REQ
+#define WOLFSSL_CERT_REQ
+
+#undef  WOLFSSL_CERT_EXT
+#define WOLFSSL_CERT_EXT
+
 #undef  HAVE_HKDF
 #define HAVE_HKDF
 
 #undef  HAVE_X963_KDF
 #define HAVE_X963_KDF
-
-#undef  NO_DSA
-#define NO_DSA
 
 #undef  HAVE_ECC
 #define HAVE_ECC
@@ -80,6 +161,12 @@ extern "C" {
 
 #undef  ECC_SHAMIR
 #define ECC_SHAMIR
+
+#undef  WOLFSSL_CUSTOM_CURVES
+#define WOLFSSL_CUSTOM_CURVES
+
+#undef  HAVE_COMP_KEY
+#define HAVE_COMP_KEY
 
 #undef  HAVE_CURVE25519
 #define HAVE_CURVE25519
@@ -93,17 +180,23 @@ extern "C" {
 #undef  HAVE_ED448
 #define HAVE_ED448
 
+#undef  FP_ECC
+#define FP_ECC
+
 #undef  HAVE_ECC_ENCRYPT
 #define HAVE_ECC_ENCRYPT
 
 #undef  WC_RSA_PSS
 #define WC_RSA_PSS
 
+#undef  HAVE_ANON
+#define HAVE_ANON
+
 #undef  WOLFSSL_BASE64_ENCODE
 #define WOLFSSL_BASE64_ENCODE
 
-#undef  WOLFSSL_BASE16
-#define WOLFSSL_BASE16
+#undef  HAVE_IDEA
+#define HAVE_IDEA
 
 #undef  WOLFSSL_CMAC
 #define WOLFSSL_CMAC
@@ -111,14 +204,17 @@ extern "C" {
 #undef  WOLFSSL_AES_DIRECT
 #define WOLFSSL_AES_DIRECT
 
-#undef  NO_HC128
-#define NO_HC128
+#undef  WOLFSSL_AES_XTS
+#define WOLFSSL_AES_XTS
+
+#undef  WOLFSSL_AES_DIRECT
+#define WOLFSSL_AES_DIRECT
+
+#undef  HAVE_HC128
+#define HAVE_HC128
 
 #undef  HAVE_RABBIT
 #define HAVE_RABBIT
-
-#undef  WC_RC2
-#define WC_RC2
 
 #undef  WOLFSSL_SHA224
 #define WOLFSSL_SHA224
@@ -144,6 +240,27 @@ extern "C" {
 #undef  HAVE_HASHDRBG
 #define HAVE_HASHDRBG
 
+#undef  HAVE_OCSP
+#define HAVE_OCSP
+
+#undef  HAVE_OPENSSL_CMD
+#define HAVE_OPENSSL_CMD
+
+#undef  HAVE_TLS_EXTENSIONS
+#define HAVE_TLS_EXTENSIONS
+
+#undef  HAVE_CERTIFICATE_STATUS_REQUEST
+#define HAVE_CERTIFICATE_STATUS_REQUEST
+
+#undef  HAVE_TLS_EXTENSIONS
+#define HAVE_TLS_EXTENSIONS
+
+#undef  HAVE_CERTIFICATE_STATUS_REQUEST_V2
+#define HAVE_CERTIFICATE_STATUS_REQUEST_V2
+
+#undef  HAVE_CRL
+#define HAVE_CRL
+
 #undef  HAVE_TLS_EXTENSIONS
 #define HAVE_TLS_EXTENSIONS
 
@@ -153,14 +270,35 @@ extern "C" {
 #undef  HAVE_EXTENDED_MASTER
 #define HAVE_EXTENDED_MASTER
 
-#undef  WOLFCRYPT_HAVE_SRP
-#define WOLFCRYPT_HAVE_SRP
+#undef  HAVE_TLS_EXTENSIONS
+#define HAVE_TLS_EXTENSIONS
+
+#undef  HAVE_SNI
+#define HAVE_SNI
+
+#undef  HAVE_MAX_FRAGMENT
+#define HAVE_MAX_FRAGMENT
+
+#undef  HAVE_TRUNCATED_HMAC
+#define HAVE_TRUNCATED_HMAC
+
+#undef  HAVE_ALPN
+#define HAVE_ALPN
+
+#undef  HAVE_TRUSTED_CA
+#define HAVE_TRUSTED_CA
+
+#undef  HAVE_SUPPORTED_CURVES
+#define HAVE_SUPPORTED_CURVES
+
+#undef  ASN_BER_TO_DER
+#define ASN_BER_TO_DER
 
 #undef  HAVE_ENCRYPT_THEN_MAC
 #define HAVE_ENCRYPT_THEN_MAC
 
-#undef  NO_PSK
-#define NO_PSK
+#undef  WOLFSSL_ENCRYPTED_KEYS
+#define WOLFSSL_ENCRYPTED_KEYS
 
 #undef  HAVE_SCRYPT
 #define HAVE_SCRYPT
@@ -174,14 +312,23 @@ extern "C" {
 #undef  WC_NO_ASYNC_THREADING
 #define WC_NO_ASYNC_THREADING
 
+#undef  WOLF_CRYPTO_CB
+#define WOLF_CRYPTO_CB
+
 #undef  HAVE_AES_KEYWRAP
 #define HAVE_AES_KEYWRAP
 
 #undef  WOLFSSL_AES_DIRECT
 #define WOLFSSL_AES_DIRECT
 
+#undef  WOLFSSL_HASH_FLAGS
+#define WOLFSSL_HASH_FLAGS
+
 #undef  HAVE_DH_DEFAULT_PARAMS
 #define HAVE_DH_DEFAULT_PARAMS
+
+#undef  HAVE_PKCS7
+#define HAVE_PKCS7
 
 #undef  HAVE___UINT128_T
 #define HAVE___UINT128_T 1
