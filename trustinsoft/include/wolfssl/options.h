@@ -216,6 +216,9 @@ extern "C" {
 #undef  HAVE_RABBIT
 #define HAVE_RABBIT
 
+#undef  WC_RC2
+#define WC_RC2
+
 #undef  WOLFSSL_SHA224
 #define WOLFSSL_SHA224
 
