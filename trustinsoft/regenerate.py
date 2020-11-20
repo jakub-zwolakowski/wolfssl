@@ -51,22 +51,32 @@ null_filename = "null"
 machdeps = [
     {
         "machdep": "gcc_x86_32",
-        "address-alignment": 32,
-        "compilation_cmd":
-            tis.string_of_options(
-                { "-D": [ "NO_CURVED25519_128BIT", "NO_CURVED448_128BIT" ] }
-            ),
         "pretty_name": "little endian 32-bit (x86)",
+        "fields": {
+            "address-alignment": 32,
+            "compilation_cmd":
+                tis.string_of_options(
+                    { "-D": [ "NO_CURVED25519_128BIT", "NO_CURVED448_128BIT" ] }
+                ),
+        }
     },
     {
         "machdep": "gcc_x86_64",
-        "address-alignment": 64,
         "pretty_name": "little endian 64-bit (x86)",
+        "fields": {
+            "address-alignment": 64,
+        }
     },
     {
         "machdep": "gcc_ppc_64",
-        "address-alignment": 64,
         "pretty_name": "big endian 64-bit (PPC64)",
+        "fields": {
+            "address-alignment": 64,
+            "compilation_cmd":
+                tis.string_of_options(
+                    { "-D": [ "__BIG_ENDIAN__", "BIG_ENDIAN_ORDER" ] }
+                ),
+        },
     },
 ]
 
@@ -335,14 +345,12 @@ with open(common_config_path, "w") as file:
 # ---------------------------------------------------------------------------- #
 
 def make_machdep_config(machdep):
-    machdep_config = (
-        {
-            "machdep": machdep["machdep"],
-            "address-alignment": machdep["address-alignment"],
-        }
-    )
-    if "compilation_cmd" in machdep:
-        machdep_config["compilation_cmd"] = machdep["compilation_cmd"]
+    machdep_config = {
+        "machdep": machdep["machdep"]
+    }
+    fields = machdep["fields"]
+    for field in fields:
+        machdep_config[field] = fields[field]
     return machdep_config
 
 print("4. Generate 'trustinsoft/<machdep>.config' files...")
