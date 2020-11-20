@@ -626,8 +626,6 @@ initDefaultName();
         test_pass("CAVP selftest passed!\n");
 #endif
 
-// #ifndef __TRUSTINSOFT_ANALYZER__ /* Exclude the separated tests. */
-
     if ( (ret = error_test()) != 0)
         return err_sys("error    test failed!\n", ret);
     else
@@ -720,8 +718,6 @@ initDefaultName();
     else
         test_pass("SHA-512  test passed!\n");
 #endif
-
-// #endif /* __TRUSTINSOFT_ANALYZER__ */
 
 #ifdef WOLFSSL_SHA3
     if ( (ret = sha3_test()) != 0)
@@ -4966,9 +4962,6 @@ static int chacha_test(void)
 
     const byte* ivs[] = {ivs1, ivs2, ivs3, ivs4};
 
-#ifdef __TRUSTINSOFT_ANALYZER__ /* Reduce test size. */
-#define BENCH_EMBEDDED
-#endif /* __TRUSTINSOFT_ANALYZER__ */
 #ifndef BENCH_EMBEDDED
     static const byte cipher_big_result[] = {
         0x06, 0xa6, 0x5d, 0x31, 0x21, 0x6c, 0xdb, 0x37, 0x48, 0x7c, 0x01, 0x9d,

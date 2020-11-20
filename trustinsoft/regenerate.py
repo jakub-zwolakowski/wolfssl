@@ -121,6 +121,19 @@ def options_of_compile_command_json(options={"-D":[], "-U":[], "-I":[]}):
         "-U": sorted(list(U)),
     }
 
+# In case of conflicts new compile commands override old compile commands
+def union_compile_commands(cc1, cc2):
+    # -D
+    D1 = sorted(list(set(cc1["-D"]) - set(cc2["-U"])))
+    D2 = sorted(list(set(cc2["-D"]) - set(D1)))
+    # -U
+    U1 = sorted(list(set(cc1["-U"]) - set(cc2["-D"])))
+    U2 = sorted(list(set(cc2["-U"]) - set(U1)))
+    # -I
+    I = sorted(list(set(cc1["-I"]) | set(cc2["-I"])))
+    # All together.
+    return { "-D": D1 + D2, "-U": U1 + U2, "-I": I }
+
 def make_common_config():
     # C files.
     c_files = (
@@ -276,6 +289,7 @@ def make_common_config():
         ]
     )
     # Compilation options.
+    compilation_cmd = options_of_compile_command_json()
     my_options = (
         {
             "-I": [
@@ -285,11 +299,12 @@ def make_common_config():
                 "volatile=",
                 "WOLFSSL_UNALIGNED_64BIT_ACCESS",
                 "WOLFSSL_CERT_PIV",
+                "BENCH_EMBEDDED",
             ],
             "-U": [],
         }
     )
-    compilation_cmd = options_of_compile_command_json(my_options)
+    compilation_cmd = union_compile_commands(compilation_cmd, my_options)
     # Whole common.config JSON.
     config = (
         {
