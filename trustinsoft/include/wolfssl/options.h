@@ -147,6 +147,9 @@ extern "C" {
 #undef  WOLFSSL_CERT_EXT
 #define WOLFSSL_CERT_EXT
 
+#undef  WOLFSSL_CERT_GEN_CACHE
+#define WOLFSSL_CERT_GEN_CACHE
+
 #undef  HAVE_HKDF
 #define HAVE_HKDF
 
@@ -299,6 +302,9 @@ extern "C" {
 
 #undef  ASN_BER_TO_DER
 #define ASN_BER_TO_DER
+
+#undef  WOLFSSL_TEST_CERT
+#define WOLFSSL_TEST_CERT
 
 #undef  HAVE_ENCRYPT_THEN_MAC
 #define HAVE_ENCRYPT_THEN_MAC
