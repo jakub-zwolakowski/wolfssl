@@ -49,9 +49,21 @@ null_filename = "null"
 
 # Architectures.
 machdeps = [
-    # "gcc_x86_32",
-    "gcc_x86_64",
-    # "gcc_ppc_64",
+    # {
+    #     "machdep": "gcc_x86_32",
+    #     "address-alignment": 32,
+    #     "pretty_name": "little endian 32-bit (x86)",
+    # },
+    {
+        "machdep": "gcc_x86_64",
+        "address-alignment": 64,
+        "pretty_name": "little endian 64-bit (x86)",
+    },
+    # {
+    #     "machdep": "gcc_ppc_64",
+    #     "address-alignment": 64,
+    #     "pretty_name": "big endian 64-bit (PPC64)",
+    # },
 ]
 
 # --------------------------------------------------------------------------- #
@@ -272,7 +284,7 @@ def make_common_config():
             "-D": [
                 "volatile=",
                 "WOLFSSL_UNALIGNED_64BIT_ACCESS",
-                "WOLFSSL_CERT_PIV"
+                "WOLFSSL_CERT_PIV",
             ],
             "-U": [],
         }
@@ -306,7 +318,8 @@ with open(common_config_path, "w") as file:
 def make_machdep_config(machdep):
     return (
         {
-            "machdep": machdep,
+            "machdep": machdep["machdep"],
+            "address-alignment": machdep["address-alignment"],
         }
     )
 
@@ -416,22 +429,13 @@ tests = [
     "certpiv",
 ]
 
-machdep_names = {
-    "gcc_x86_32": "little endian 32-bit (x86)",
-    "gcc_x86_64": "little endian 64-bit (x86)",
-    "gcc_ppc_64": "big endian 64-bit (PPC64)",
-}
-
 def make_test(test_name, machdep):
     return (
         {
             "include": common_config_path,
-            # "compilation_database": [
-            #     "compile_commands.json"
-            # ],
-            "include_": path.join("trustinsoft", "%s.config" % machdep),
+            "include_": path.join("trustinsoft", "%s.config" % machdep["machdep"]),
             "main": "%s_test" % test_name,
-            "name": "%s test, %s" % (test_name, machdep_names[machdep])
+            "name": "%s test, %s" % (test_name, machdep["pretty_name"])
         }
     )
 

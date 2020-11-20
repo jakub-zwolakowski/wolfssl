@@ -207,16 +207,20 @@ counts, placing the result in <*buf>. */
 
 WC_STATIC WC_INLINE void xorbuf(void* buf, const void* mask, word32 count)
 {
+#ifndef __TRUSTINSOFT_ANALYZER__
     if (((wolfssl_word)buf | (wolfssl_word)mask | count) % WOLFSSL_WORD_SIZE == 0)
         XorWords( (wolfssl_word*)buf,
                   (const wolfssl_word*)mask, count / WOLFSSL_WORD_SIZE);
     else {
+#endif
         word32 i;
         byte*       b = (byte*)buf;
         const byte* m = (const byte*)mask;
 
         for (i = 0; i < count; i++) b[i] ^= m[i];
+#ifndef __TRUSTINSOFT_ANALYZER__
     }
+#endif
 }
 #endif
 
