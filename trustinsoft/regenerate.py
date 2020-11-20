@@ -392,19 +392,19 @@ tests = [
     "ed448",
     "blake2b",
     "blake2s",
-    "compress",
-    "pkcs7encrypted",
-    "pkcs7compressed",
+    # "compress", # Requires libz.
+    # "pkcs7encrypted", # The C file pkcs7.c causes an error.
+    # "pkcs7compressed", # The C file pkcs7.c causes an error.
     "pkcs7signed",
     "pkcs7enveloped",
     "pkcs7authenveloped",
-    "pkcs7callback",
+    # "pkcs7callback", # Requires arguments.
     "cert",
     "certext",
     "decodedCertCache",
     "idea",
     "memory",
-    "mp",
+    # "mp", # Requires valgrind.
     "prime",
     "berder",
     "logging",
