@@ -23,6 +23,9 @@ import shutil # copyfileobj
 common_config_path = path.join("trustinsoft", "common.config")
 include_dir = path.join("trustinsoft", "include")
 
+# Files.
+compile_commands_path = "compile_commands.json"
+
 # Generated files which need to be a part of the repository.
 def make_simple_copy_file(src_path):
     return (
@@ -58,7 +61,7 @@ machdeps = [
 # Initial check.
 print("1. Check if all necessary directories and files exist...")
 tis.check_dir("trustinsoft")
-tis.check_file("compile_commands.json")
+tis.check_file(compile_commands_path)
 for file in files_to_copy:
     tis.check_file(file['src'])
 
@@ -66,8 +69,19 @@ for file in files_to_copy:
 # -------------------- GENERATE trustinsoft/common.config ------------------- #
 # --------------------------------------------------------------------------- #
 
-def options_of_compile_command_json(compile_commands_path,
-                                    options={"-D":[], "-U":[], "-I":[]}):
+def normalize_compile_command_json():
+    with open(compile_commands_path, "r") as file:
+        compile_commands = json.load(file)
+    compile_commands.sort(key =
+        lambda entry:
+            entry["directory"] + " " +
+            entry["file"] + " " +
+            " ".join(entry["arguments"])
+    )
+    with open(compile_commands_path, "w") as file:
+        file.write(json.dumps(compile_commands, indent=4))
+
+def options_of_compile_command_json(options={"-D":[], "-U":[], "-I":[]}):
     D = set(options["-D"])
     U = set(options["-U"])
     I = set(options["-I"])
@@ -229,8 +243,7 @@ def make_common_config():
             "-U": [],
         }
     )
-    compilation_cmd = options_of_compile_command_json("compile_commands.json",
-                                                      my_options)
+    compilation_cmd = options_of_compile_command_json(my_options)
     # Whole common.config JSON.
     config = (
         {
@@ -242,9 +255,13 @@ def make_common_config():
     # Done.
     return config
 
+
+print("2. Normalize the '%s' file." % compile_commands_path)
+normalize_compile_command_json()
+
 common_config = make_common_config()
 with open(common_config_path, "w") as file:
-    print("2. Generate the '%s' file." % common_config_path)
+    print("3. Generate the '%s' file." % common_config_path)
     file.write(tis.string_of_json(common_config))
 
 
@@ -259,7 +276,7 @@ def make_machdep_config(machdep):
         }
     )
 
-print("3. Generate 'trustinsoft/<machdep>.config' files...")
+print("4. Generate 'trustinsoft/<machdep>.config' files...")
 machdep_configs = map(make_machdep_config, machdeps)
 for machdep_config in machdep_configs:
     file = path.join("trustinsoft", "%s.config" % machdep_config["machdep"])
@@ -389,7 +406,7 @@ tis_config = list(map(
     product(tests, machdeps)
 ))
 with open("tis.config", "w") as file:
-    print("4. Generate the 'tis.config' file.")
+    print("5. Generate the 'tis.config' file.")
     file.write(tis.string_of_json(tis_config))
 
 
@@ -397,7 +414,7 @@ with open("tis.config", "w") as file:
 # ------------------------------ COPY .h FILES ------------------------------ #
 # --------------------------------------------------------------------------- #
 
-print("5. Copy generated files.")
+print("6. Copy generated files.")
 for file in files_to_copy:
     with open(file['src'], 'r') as f_src:
         os.makedirs(path.dirname(file['dst']), exist_ok=True)
@@ -409,7 +426,7 @@ for file in files_to_copy:
 # ---------------------------- PREP OTHER FILES  ---------------------------- #
 # --------------------------------------------------------------------------- #
 
-print("5. Prepare other files.")
+print("6. Prepare other files.")
 with open(path.join("trustinsoft", urandom_filename), 'wb') as file:
     print("   > Create the 'trustinsoft/%s' file." % urandom_filename)
     file.write(os.urandom(urandom_length))
