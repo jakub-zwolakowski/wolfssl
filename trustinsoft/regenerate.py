@@ -271,7 +271,8 @@ def make_common_config():
             ],
             "-D": [
                 "volatile=",
-                "WOLFSSL_UNALIGNED_64BIT_ACCESS"
+                "WOLFSSL_UNALIGNED_64BIT_ACCESS",
+                "WOLFSSL_CERT_PIV"
             ],
             "-U": [],
         }
@@ -410,7 +411,7 @@ tests = [
     "logging",
     "mutex",
     "memcb",
-    "blob",
+    # "blob", # Check this later...
     "cryptocb",
     "certpiv",
 ]
