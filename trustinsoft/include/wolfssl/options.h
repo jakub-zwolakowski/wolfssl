@@ -69,6 +69,12 @@ extern "C" {
 #undef  WOLFSSL_VALIDATE_ECC_IMPORT
 #define WOLFSSL_VALIDATE_ECC_IMPORT
 
+#undef  TFM_NO_ASM
+#define TFM_NO_ASM
+
+#undef  WOLFSSL_NO_ASM
+#define WOLFSSL_NO_ASM
+
 #undef  TFM_TIMING_RESISTANT
 #define TFM_TIMING_RESISTANT
 
@@ -236,6 +242,9 @@ extern "C" {
 
 #undef  HAVE_ONE_TIME_AUTH
 #define HAVE_ONE_TIME_AUTH
+
+#undef  NO_CHACHA_ASM
+#define NO_CHACHA_ASM
 
 #undef  HAVE_CHACHA
 #define HAVE_CHACHA
