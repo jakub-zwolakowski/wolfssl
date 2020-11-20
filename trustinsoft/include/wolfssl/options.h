@@ -294,6 +294,9 @@ extern "C" {
 #undef  HAVE_SUPPORTED_CURVES
 #define HAVE_SUPPORTED_CURVES
 
+#undef  WOLFCRYPT_HAVE_SRP
+#define WOLFCRYPT_HAVE_SRP
+
 #undef  ASN_BER_TO_DER
 #define ASN_BER_TO_DER
 
