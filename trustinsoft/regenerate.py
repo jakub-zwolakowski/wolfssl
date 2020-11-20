@@ -68,6 +68,25 @@ machdeps = [
         }
     },
     {
+        "machdep": "gcc_ppc_32",
+        "pretty_name": "big endian 32-bit (PPC32)",
+        "fields": {
+            "address-alignment": 32,
+            "compilation_cmd":
+                tis.string_of_options(
+                    {
+                        "-D":
+                            [
+                                "__BIG_ENDIAN__",
+                                "BIG_ENDIAN_ORDER",
+                                "NO_CURVED25519_128BIT",
+                                "NO_CURVED448_128BIT",
+                            ]
+                    }
+                ),
+        },
+    },
+    {
         "machdep": "gcc_ppc_64",
         "pretty_name": "big endian 64-bit (PPC64)",
         "fields": {
