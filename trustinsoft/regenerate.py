@@ -56,7 +56,15 @@ machdeps = [
             "address-alignment": 32,
             "compilation_cmd":
                 tis.string_of_options(
-                    { "-D": [ "NO_CURVED25519_128BIT", "NO_CURVED448_128BIT" ] }
+                    {
+                        "-D":
+                            [
+                                "PIC",
+                                "NO_CURVED25519_128BIT",
+                                "NO_CURVED448_128BIT",
+                            ],
+                        "-I": [ "gcc_x86_32/include" ],
+                    }
                 ),
         }
     },
@@ -65,6 +73,20 @@ machdeps = [
         "pretty_name": "little endian 64-bit (x86)",
         "fields": {
             "address-alignment": 64,
+            "compilation_cmd":
+                tis.string_of_options(
+                    {
+                        "-D":
+                            [
+                                "PIC",
+                                "HAVE___UINT128_T=1",
+                                "USE_FAST_MATH",
+                                "WOLFSSL_BASE64_ENCODE",
+                                "WOLFSSL_X86_64_BUILD",
+                            ],
+                        "-I": [ "gcc_x86_64/include" ],
+                    }
+                ),
         }
     },
     {
@@ -77,11 +99,13 @@ machdeps = [
                     {
                         "-D":
                             [
+                                "PIC",
                                 "__BIG_ENDIAN__",
                                 "BIG_ENDIAN_ORDER",
                                 "NO_CURVED25519_128BIT",
                                 "NO_CURVED448_128BIT",
-                            ]
+                            ],
+                         "-I": [ "gcc_ppc_32/include" ],
                     }
                 ),
         },
@@ -93,7 +117,15 @@ machdeps = [
             "address-alignment": 64,
             "compilation_cmd":
                 tis.string_of_options(
-                    { "-D": [ "__BIG_ENDIAN__", "BIG_ENDIAN_ORDER" ] }
+                    {
+                        "-D":
+                            [
+                                "__BIG_ENDIAN__",
+                                "BIG_ENDIAN_ORDER",
+                                "HAVE___UINT128_T=1",
+                            ],
+                        "-I": [ "gcc_ppc_64/include" ],
+                    }
                 ),
         },
     },
@@ -107,8 +139,9 @@ machdeps = [
 print("1. Check if all necessary directories and files exist...")
 tis.check_dir("trustinsoft")
 tis.check_file(compile_commands_path)
-for file in files_to_copy:
-    tis.check_file(file['src'])
+if False:
+    for file in files_to_copy:
+        tis.check_file(file['src'])
 
 # --------------------------------------------------------------------------- #
 # -------------------- GENERATE trustinsoft/common.config ------------------- #
@@ -308,6 +341,7 @@ def make_common_config():
                 "server-cert.pem",
                 "server-key.pem",
                 "ca-cert.pem",
+                "dh2048.der",
             ]
         )) +
         [
@@ -322,12 +356,134 @@ def make_common_config():
         ]
     )
     # Compilation options.
-    compilation_cmd = options_of_compile_command_json()
-    my_options = (
+    # THIS DOES NOT WORK, BECAUSE compile_command.json DIFFERS FOR EACH machdep
+    # compilation_cmd = options_of_compile_command_json()
+    compilation_cmd = (
         {
             "-I": [
-                "include",
+                "..",
+                "../examples/client",
+                "../examples/echoclient",
+                "../examples/echoserver",
+                "../examples/server",
+                "../src",
+                "../tests",
+                "../testsuite",
+                "../wolfcrypt/benchmark",
+                "../wolfcrypt/src",
+                "../wolfcrypt/test",
             ],
+            "-D": [
+                "ASN_BER_TO_DER",
+                "ATOMIC_USER",
+                "BUILDING_WOLFSSL",
+                "ECC_SHAMIR",
+                "ECC_TIMING_RESISTANT",
+                "FP_ECC",
+                "FP_MAX_BITS=8192",
+                "HAVE_AESCCM",
+                "HAVE_AESGCM",
+                "HAVE_AES_DECRYPT",
+                "HAVE_AES_ECB",
+                "HAVE_AES_KEYWRAP",
+                "HAVE_ALPN",
+                "HAVE_ANON",
+                "HAVE_BLAKE2",
+                "HAVE_BLAKE2B",
+                "HAVE_BLAKE2S",
+                "HAVE_CAMELLIA",
+                "HAVE_CERTIFICATE_STATUS_REQUEST",
+                "HAVE_CERTIFICATE_STATUS_REQUEST_V2",
+                "HAVE_CHACHA",
+                "HAVE_COMP_KEY",
+                "HAVE_CONFIG_H",
+                "HAVE_CRL",
+                "HAVE_CURVE25519",
+                "HAVE_CURVE448",
+                "HAVE_DH_DEFAULT_PARAMS",
+                "HAVE_ECC",
+                "HAVE_ECC_ENCRYPT",
+                "HAVE_ED25519",
+                "HAVE_ED448",
+                "HAVE_ENCRYPT_THEN_MAC",
+                "HAVE_EXTENDED_MASTER",
+                "HAVE_FFDHE_2048",
+                "HAVE_FFDHE_3072",
+                "HAVE_HASHDRBG",
+                "HAVE_HC128",
+                "HAVE_HKDF",
+                "HAVE_IDEA",
+                "HAVE_MAX_FRAGMENT",
+                "HAVE_NULL_CIPHER",
+                "HAVE_OCSP",
+                "HAVE_ONE_TIME_AUTH",
+                "HAVE_OPENSSL_CMD",
+                "HAVE_PKCS7",
+                "HAVE_PK_CALLBACKS",
+                "HAVE_POLY1305",
+                "HAVE_RABBIT",
+                "HAVE_SCRYPT",
+                "HAVE_SNI",
+                "HAVE_SUPPORTED_CURVES",
+                "HAVE_THREAD_LS",
+                "HAVE_TLS_EXTENSIONS",
+                "HAVE_TRUNCATED_HMAC",
+                "HAVE_TRUSTED_CA",
+                "HAVE_WC_INTROSPECTION",
+                "HAVE_X963_KDF",
+                "HAVE_XCHACHA",
+                "KEEP_PEER_CERT",
+                "NDEBUG",
+                "NO_CHACHA_ASM",
+                "NO_MAIN_DRIVER",
+                "SESSION_CERTS",
+                "SINGLE_THREADED",
+                "TFM_ECC256",
+                "TFM_NO_ASM",
+                "TFM_TIMING_RESISTANT",
+                "WC_NO_ASYNC_THREADING",
+                "WC_RC2",
+                "WC_RSA_BLINDING",
+                "WC_RSA_PSS",
+                "WOLFCRYPT_HAVE_SRP",
+                "WOLFSSL_AES_CFB",
+                "WOLFSSL_AES_COUNTER",
+                "WOLFSSL_AES_DIRECT",
+                "WOLFSSL_AES_OFB",
+                "WOLFSSL_AES_XTS",
+                "WOLFSSL_ALT_NAMES",
+                "WOLFSSL_CERT_EXT",
+                "WOLFSSL_CERT_GEN",
+                "WOLFSSL_CERT_GEN_CACHE",
+                "WOLFSSL_CERT_REQ",
+                "WOLFSSL_CMAC",
+                "WOLFSSL_CUSTOM_CURVES",
+                "WOLFSSL_DER_LOAD",
+                "WOLFSSL_ENCRYPTED_KEYS",
+                "WOLFSSL_HASH_FLAGS",
+                "WOLFSSL_KEY_GEN",
+                "WOLFSSL_MD2",
+                "WOLFSSL_MULTI_ATTRIB",
+                "WOLFSSL_NO_ASM",
+                "WOLFSSL_RIPEMD",
+                "WOLFSSL_SEP",
+                "WOLFSSL_SHA224",
+                "WOLFSSL_SHA3",
+                "WOLFSSL_SHA384",
+                "WOLFSSL_SHA512",
+                "WOLFSSL_SHAKE256",
+                "WOLFSSL_TEST_CERT",
+                "WOLFSSL_TLS13",
+                "WOLFSSL_VALIDATE_ECC_IMPORT",
+                "WOLFSSL_VALIDATE_ECC_KEYGEN",
+                "WOLF_CRYPTO_CB",
+            ],
+            "-U": []
+        }
+    )
+    my_options = (
+        {
+            "-I": [],
             "-D": [
                 "volatile=",
                 "WOLFSSL_UNALIGNED_64BIT_ACCESS",
@@ -492,10 +648,9 @@ tis_config = list(map(
     lambda t: make_test(t[0], t[1]),
     product(tests, machdeps)
 ))
-if False: # TMP
-    with open("tis.config", "w") as file:
-        print("5. Generate the 'tis.config' file.")
-        file.write(tis.string_of_json(tis_config))
+with open("tis.config", "w") as file:
+    print("5. Generate the 'tis.config' file.")
+    file.write(tis.string_of_json(tis_config))
 
 
 # --------------------------------------------------------------------------- #
