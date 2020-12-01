@@ -597,12 +597,12 @@ tests = [
     "dsa",
     "srp",
     "random",
-    "pwdbased",
+    # "pwdbased", # Aggregates 4 tests: pbkdf1, pbkdf2, pkcs12, scrypt.
     "ripemd",
     "pbkdf1",
     "pkcs12",
     "pbkdf2",
-    "scrypt",
+    "scrypt", # VERY reduced.
     "ecc",
     "ecc_encrypt",
     "curve25519",

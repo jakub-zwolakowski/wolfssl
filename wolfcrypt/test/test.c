@@ -18406,12 +18406,14 @@ static int scrypt_test(void)
     if (XMEMCMP(derived, verify1, sizeof(verify1)) != 0)
         return -9001;
 
+#ifndef __TRUSTINSOFT_ANALYZER__ // Test too long.
     ret = wc_scrypt(derived, (byte*)"password", 8, (byte*)"NaCl", 4, 10, 8, 16,
                     sizeof(verify2));
     if (ret != 0)
         return -9002;
     if (XMEMCMP(derived, verify2, sizeof(verify2)) != 0)
         return -9003;
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
     /* Don't run these test on embedded, since they use large mallocs */
 #if !defined(BENCH_EMBEDDED) && !defined(WOLFSSL_LINUXKM) && !defined(HAVE_INTEL_QA)
@@ -18432,12 +18434,14 @@ static int scrypt_test(void)
 #endif
 #endif /* !BENCH_EMBEDDED && !defined(WOLFSSL_LINUXKM) && !HAVE_INTEL_QA */
 
+#ifndef __TRUSTINSOFT_ANALYZER__ // Test too long.
     ret = wc_scrypt_ex(derived, (byte*)"password", 8, (byte*)"NaCl", 4, 1<<10,
                        8, 16, sizeof(verify2));
     if (ret != 0)
         return -9008;
     if (XMEMCMP(derived, verify2, sizeof(verify2)) != 0)
         return -9009;
+#endif /* __TRUSTINSOFT_ANALYZER__ */
 
     return 0;
 }
