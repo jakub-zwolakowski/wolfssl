@@ -492,31 +492,34 @@ tis_config = list(map(
     lambda t: make_test(t[0], t[1]),
     product(tests, machdeps)
 ))
-with open("tis.config", "w") as file:
-    print("5. Generate the 'tis.config' file.")
-    file.write(tis.string_of_json(tis_config))
+if False: # TMP
+    with open("tis.config", "w") as file:
+        print("5. Generate the 'tis.config' file.")
+        file.write(tis.string_of_json(tis_config))
 
 
 # --------------------------------------------------------------------------- #
 # ------------------------------ COPY .h FILES ------------------------------ #
 # --------------------------------------------------------------------------- #
 
-print("6. Copy generated files.")
-for file in files_to_copy:
-    with open(file['src'], 'r') as f_src:
-        os.makedirs(path.dirname(file['dst']), exist_ok=True)
-        with open(file['dst'], 'w') as f_dst:
-            print("   > Copy '%s' to '%s'." % (file['src'], file['dst']))
-            shutil.copyfileobj(f_src, f_dst)
+if False: # TMP
+    print("6. Copy generated files.")
+    for file in files_to_copy:
+        with open(file['src'], 'r') as f_src:
+            os.makedirs(path.dirname(file['dst']), exist_ok=True)
+            with open(file['dst'], 'w') as f_dst:
+                print("   > Copy '%s' to '%s'." % (file['src'], file['dst']))
+                shutil.copyfileobj(f_src, f_dst)
 
 # --------------------------------------------------------------------------- #
 # ---------------------------- PREP OTHER FILES  ---------------------------- #
 # --------------------------------------------------------------------------- #
 
 print("6. Prepare other files.")
-with open(path.join("trustinsoft", urandom_filename), 'wb') as file:
-    print("   > Create the 'trustinsoft/%s' file." % urandom_filename)
-    file.write(os.urandom(urandom_length))
+if False: # TMP
+    with open(path.join("trustinsoft", urandom_filename), 'wb') as file:
+        print("   > Create the 'trustinsoft/%s' file." % urandom_filename)
+        file.write(os.urandom(urandom_length))
 with open(path.join("trustinsoft", null_filename), 'wb') as file:
     print("   > Create the 'trustinsoft/%s' file." % null_filename)
     file.truncate()
