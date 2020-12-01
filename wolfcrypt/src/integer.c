@@ -2479,7 +2479,11 @@ int fast_mp_montgomery_reduce (mp_int * x, mp_int * n, mp_digit rho)
     return MP_MEM;
 #endif
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+  XMEMSET(W, 0, sizeof(mp_word) * MP_WARRAY);
+#else
   XMEMSET(W, 0, (n->used * 2 + 1) * sizeof(mp_word));
+#endif
 
   /* first we have to get the digits of the input into
    * an array of double precision words W[...]
