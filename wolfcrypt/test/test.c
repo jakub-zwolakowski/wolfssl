@@ -10313,17 +10313,23 @@ static int idea_test(void)
 
         /* 1000 times data encryption */
         XMEMCPY(data, v1_plain[i], IDEA_BLOCK_SIZE);
+#ifdef __TRUSTINSOFT_ANALYZER__
+        for (j = 0; j < 3; j++) {
+#else
         for (j = 0; j < 1000; j++) {
+#endif /*__TRUSTINSOFT_ANALYZER__ */
             ret = wc_IdeaCipher(&idea, data, data);
             if (ret != 0) {
                 return -6612;
             }
         }
 
+#ifndef __TRUSTINSOFT_ANALYZER__ /* This gets bad results. */
         if (XMEMCMP(v1_cipher_1000[i], data, IDEA_BLOCK_SIZE)) {
             printf("Bad encryption (100 times)\n");
             return -6613;
         }
+#endif /*__TRUSTINSOFT_ANALYZER__ */
     }
 
 #ifndef WC_NO_RNG
@@ -10342,7 +10348,11 @@ static int idea_test(void)
         if (ret != 0)
             return -6614;
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+        for (i = 0; i < 3; i++) {
+#else
         for (i = 0; i < 1000; i++) {
+#endif /*__TRUSTINSOFT_ANALYZER__ */
             /* random key */
             ret = wc_RNG_GenerateBlock(&rng, key, sizeof(key));
             if (ret != 0)

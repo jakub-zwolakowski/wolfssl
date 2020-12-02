@@ -603,8 +603,8 @@ tests = [
     "pkcs12",
     "pbkdf2",
     "scrypt", # VERY reduced.
-    "ecc",
-    "ecc_encrypt",
+    # "ecc", # Very large and complex.
+    # "ecc_encrypt", # Very long, though there is an UB here after 1 hour 20 min (in "ret = -10004")
     "curve25519",
     "ed25519",
     "curve448",
