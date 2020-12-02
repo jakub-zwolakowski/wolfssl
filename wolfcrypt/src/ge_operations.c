@@ -9098,7 +9098,7 @@ static void ge_select(ge_precomp *t,int pos,signed char b)
 #ifndef CURVED25519_ASM
   ge_precomp minust;
   unsigned char bnegative = negative(b);
-  unsigned char babs = b - (((-bnegative) & b) << 1);
+  unsigned char babs = b - (((unsigned char)(-bnegative) & b) << 1);
 
   ge_precomp_0(t);
   cmov(t,&base[pos][0],babs,1);
