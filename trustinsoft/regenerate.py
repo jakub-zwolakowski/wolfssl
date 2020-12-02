@@ -63,6 +63,7 @@ machdeps = [
                                 "NO_CURVED25519_128BIT",
                                 "NO_CURVED448_128BIT",
                             ],
+                        "-U": [ "__x86_64__" ],
                         "-I": [ "gcc_x86_32/include" ],
                     }
                 ),
@@ -104,6 +105,11 @@ machdeps = [
                                 "BIG_ENDIAN_ORDER",
                                 "NO_CURVED25519_128BIT",
                                 "NO_CURVED448_128BIT",
+                            ],
+                         "-U":
+                            [
+                                "__x86_64__",
+                                "HAVE_POLY1305",
                             ],
                          "-I": [ "gcc_ppc_32/include" ],
                     }
