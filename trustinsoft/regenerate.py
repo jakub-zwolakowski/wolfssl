@@ -628,8 +628,8 @@ tests = [
     "pkcs7authenveloped",
     # "pkcs7callback", # Requires arguments.
     "cert",
-    "certext",
-    # "decodedCertCache", # Requires cert.der file written by other test I think.
+    # "certext", # Requires cert.der file written by rsa_test (I think).
+    # "decodedCertCache", # Requires cert.der file written by rsa_test (I think).
     "idea",
     "memory",
     # "mp", # Requires valgrind.
