@@ -629,7 +629,7 @@ tests = [
     # "pkcs7callback", # Requires arguments.
     "cert",
     "certext",
-    "decodedCertCache",
+    # "decodedCertCache", # Requires cert.der file written by other test I think.
     "idea",
     "memory",
     # "mp", # Requires valgrind.
