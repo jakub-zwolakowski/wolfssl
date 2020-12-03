@@ -10546,7 +10546,7 @@ static void ge448_select(ge448_precomp* r, int pos, int8_t b)
 {
     ge448 minusx[16];
     uint8_t bnegative = negative(b);
-    uint8_t babs = b - (((-bnegative) & b) << 1);
+    uint8_t babs = b - (((unsigned char)(-bnegative) & b) << 1);
 
     ge448_precomp_0(r);
     cmov(r, &base[pos][0], babs, 1);
