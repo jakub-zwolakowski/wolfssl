@@ -1577,7 +1577,11 @@ int mp_div_2(mp_int * a, mp_int * b)
       rr = *tmpa & 1;
 
       /* shift the current digit, add in carry and store */
-      *tmpb-- = (*tmpa-- >> 1) | (r << (DIGIT_BIT - 1));
+      *tmpb = (*tmpa >> 1) | (r << (DIGIT_BIT - 1));
+      if (x > 0) {
+        tmpb--;
+        tmpa--;
+      }
 
       /* forward carry to next iteration */
       r = rr;
