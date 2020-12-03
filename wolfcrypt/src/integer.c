@@ -821,11 +821,7 @@ int mp_lshd (mp_int * a, int b)
      * the bottom to the top.  see bn_mp_rshd.c for more info.
      */
     for (x = a->used - 1; x >= b; x--) {
-      *top = *bottom;
-      if(x > b) {
-        top--;
-        bottom--;
-      }
+      *top-- = *bottom--;
     }
 
     /* zero the lower digits */
