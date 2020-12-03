@@ -348,6 +348,9 @@ def make_common_config():
                 "server-key.pem",
                 "ca-cert.pem",
                 "dh2048.der",
+                "test/cert-ext-nc.der",
+                "test/cert-ext-ia.der",
+                "test/cert-ext-nct.der",
             ]
         )) +
         [
