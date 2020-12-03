@@ -15849,6 +15849,7 @@ static int srp_test(void)
     if (!r) r = wc_SrpSetVerifier(&srv, verifier, v_size);
     if (!r) r = wc_SrpGetPublic(&srv, serverPubKey, &serverPubKeySz);
 
+#ifndef __TRUSTINSOFT_ANALYZER__
     /* server sends N, g, salt and B to client */
 
     if (!r) r = wc_SrpGetPublic(&cli, clientPubKey, &clientPubKeySz);
@@ -15866,6 +15867,7 @@ static int srp_test(void)
     /* server sends M2 to client */
 
     if (!r) r = wc_SrpVerifyPeersProof(&cli, serverProof, serverProofSz);
+#endif
 
     wc_SrpTerm(&cli);
     wc_SrpTerm(&srv);
