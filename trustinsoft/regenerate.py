@@ -351,6 +351,7 @@ def make_common_config():
                 "test/cert-ext-nc.der",
                 "test/cert-ext-ia.der",
                 "test/cert-ext-nct.der",
+                "client-key.der",
             ]
         )) +
         [
