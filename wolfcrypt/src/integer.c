@@ -592,7 +592,7 @@ void mp_rshb (mp_int *c, int x)
 
       /* shift the current word and mix in the carry bits from previous word */
       *tmpc = (*tmpc >> D) | (r << shift);
-      --tmpc;
+      if (x > 0) --tmpc;
 
       /* set the carry to the carry bits of the current word found above */
       r = rr;
