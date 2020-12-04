@@ -15468,6 +15468,9 @@ static int dh_test(void)
     }
 
     ret = wc_DhGenerateKeyPair(key2, &rng, priv2, &privSz2, pub2, &pubSz2);
+#ifdef __TRUSTINSOFT_ANALYZER__
+    goto done;
+#endif
 #if defined(WOLFSSL_ASYNC_CRYPT)
     ret = wc_AsyncWait(ret, &key2->asyncDev, WC_ASYNC_FLAG_NONE);
 #endif
