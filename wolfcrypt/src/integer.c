@@ -1358,13 +1358,18 @@ int mp_cmp_mag (mp_int * a, mp_int * b)
   tmpb = b->dp + (a->used - 1);
 
   /* compare based on digits  */
-  for (n = 0; n < a->used; ++n, --tmpa, --tmpb) {
+  for (n = 0; n < a->used; ++n) {
     if (*tmpa > *tmpb) {
       return MP_GT;
     }
 
     if (*tmpa < *tmpb) {
       return MP_LT;
+    }
+
+    if(n + 1 < a->used) {
+      --tmpa;
+      --tmpb;
     }
   }
   return MP_EQ;

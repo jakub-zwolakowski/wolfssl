@@ -13879,6 +13879,10 @@ static int rsa_test(void)
         goto exit_rsa;
 #endif
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    goto exit_rsa;
+#endif
+
 #if !defined(WOLFSSL_RSA_VERIFY_ONLY) && !defined(WOLFSSL_RSA_PUBLIC_ONLY)
     do {
 #if defined(WOLFSSL_ASYNC_CRYPT)
