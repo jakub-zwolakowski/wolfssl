@@ -14,6 +14,27 @@ from os import path # path.basename, path.isdir, path.join
 import glob # iglob
 from itertools import product  # Cartesian product of lists.
 import shutil # copyfileobj
+import argparse # ArgumentParser, add_argument, parse_args
+
+# --------------------------------------------------------------------------- #
+# ----------------------------- PARSE ARGUMENTS ----------------------------- #
+# --------------------------------------------------------------------------- #
+
+parser = argparse.ArgumentParser(
+    description="Regenerate the TrustInSoft CI files.",
+    epilog="Please call this script only after building wolfSSL.")
+# parser.add_argument("--safe-arrays", action="store_true",
+#                     help="for multidimensional arrays or arrays that are \
+#                           fields inside structs, assume that accesses are in \
+#                           bounds")
+parser.add_argument("--only",
+                    help="include only the test with given name")
+parser.add_argument("--modes", default="normal",
+                    choices=["normal", "max", "both"],
+                    help="chose the versions of tests to put in tis.config: \
+                          normal ones, the ones with no-results and max \
+                          timeout, or both")
+args = parser.parse_args()
 
 # --------------------------------------------------------------------------- #
 # -------------------------------- SETTINGS --------------------------------- #
@@ -644,20 +665,36 @@ tests = [
     "certpiv",
 ]
 
-def make_test(test_name, machdep):
-    return (
-        {
-            "include": common_config_path,
-            "include_": path.join("trustinsoft", "%s.config" % machdep["machdep"]),
-            "main": "%s_test" % test_name,
-            "name": "%s test, %s" % (test_name, machdep["pretty_name"])
-        }
-    )
+def make_test(test_name, mode, machdep):
+    tis_test = {
+        "name": "%s test, %s" % (test_name, machdep["pretty_name"]),
+        "main": "%s_test" % test_name,
+        "include": common_config_path,
+        "include_": path.join("trustinsoft", "%s.config" % machdep["machdep"]),
+    }
+    if mode == "max":
+        tis_test["no-results"] = True
+        tis_test["val-timeout"] = 10800
+    return tis_test
 
-tis_config = list(map(
-    lambda t: make_test(t[0], t[1]),
-    product(tests, machdeps)
-))
+def make_tis_config():
+    # ONLY
+    if (args.only == None):
+        all_tests = tests
+    else:
+        all_tests = [ args.only ]
+    # MODES
+    modes = [ args.modes ]
+    if args.modes == "both":
+        modes = [ "normal", "max" ]
+    # ALL
+    tis_tests = product(all_tests, modes, machdeps)
+    return list(map(
+        lambda t: make_test(t[0], t[1], t[2]),
+        tis_tests
+    ))
+
+tis_config = make_tis_config()
 with open("tis.config", "w") as file:
     print("5. Generate the 'tis.config' file.")
     file.write(tis.string_of_json(tis_config))
