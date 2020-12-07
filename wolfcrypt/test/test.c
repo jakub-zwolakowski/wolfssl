@@ -18503,7 +18503,7 @@ static int pkcs12_test(void)
         return -9101;
 
 #ifdef __TRUSTINSOFT_ANALYZER__
-    iterations = 250;
+    iterations = 125;
 #else
     iterations = 1000;
 #endif
