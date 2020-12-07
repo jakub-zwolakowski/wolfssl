@@ -18502,7 +18502,11 @@ static int pkcs12_test(void)
     if (XMEMCMP(derived, verify, kLen) != 0)
         return -9101;
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    iterations = 500;
+#else
     iterations = 1000;
+#endif
     ret = wc_PKCS12_PBKDF(derived, passwd2, sizeof(passwd2), salt2, 8,
                                                   iterations, kLen, WC_SHA256, id);
     if (ret < 0)
