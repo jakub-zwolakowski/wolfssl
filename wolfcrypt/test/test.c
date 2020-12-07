@@ -18525,7 +18525,11 @@ static int pbkdf2_test(void)
 {
     char passwd[] = "passwordpassword";
     static const byte salt[] = { 0x78, 0x57, 0x8E, 0x5a, 0x5d, 0x63, 0xcb, 0x06 };
+#ifdef __TRUSTINSOFT_ANALYZER__
+    int   iterations = 128;
+#else
     int   iterations = 2048;
+#endif
     int   kLen = 24;
     byte  derived[64];
 
