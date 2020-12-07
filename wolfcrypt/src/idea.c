@@ -48,7 +48,7 @@ static WC_INLINE word16 idea_mult(word16 x, word16 y)
 {
     long mul, res;
 
-    mul = (long)x * (long)y;
+    mul = (long long)x * (long long)y;
     if (mul) {
         res = (mul & IDEA_MASK) - ((word32)mul >> 16);
         if (res <= 0)
