@@ -8908,7 +8908,7 @@ static int wc_PKCS7_DecryptPwri(PKCS7* pkcs7, byte* in, word32 inSz,
     switch (pkcs7->state) {
         case WC_PKCS7_DECRYPT_PWRI:
         #ifndef NO_PKCS7_STREAM
-            /*@TODO for now just get full buffer, needs divided up */
+            /* @TODO for now just get full buffer, needs divided up */
             if ((ret = wc_PKCS7_AddDataToStream(pkcs7, in, inSz,
                    (pkcs7->stream->maxLen - pkcs7->stream->totalRd) +
                    pkcs7->stream->length, &pkiMsg, idx)) != 0) {

@@ -288,7 +288,7 @@ def make_common_config():
                 "memory.c",
                 # "misc.c", #warning misc.c does not need to be compiled when using inline (NO_INLINE not defined)
                 "pkcs12.c",
-                # "pkcs7.c", # ERROR
+                "pkcs7.c", # Needed adjusting.
                 "poly1305.c",
                 "pwdbased.c",
                 "rabbit.c",
@@ -365,14 +365,21 @@ def make_common_config():
                     "from": path.join("..", "certs", file),
                 },
             [
-                "server-cert.pem",
-                "server-key.pem",
+                "ca-cert.der",
                 "ca-cert.pem",
-                "dh2048.der",
-                "test/cert-ext-nc.der",
-                "test/cert-ext-ia.der",
-                "test/cert-ext-nct.der",
+                "ca-key.der",
+                "client-cert.der",
+                "client-ecc-cert.der",
                 "client-key.der",
+                "dh2048.der",
+                "ecc-client-key.der",
+                "server-cert.der",
+                "server-cert.pem",
+                "server-key.der",
+                "server-key.pem",
+                "test/cert-ext-ia.der",
+                "test/cert-ext-nc.der",
+                "test/cert-ext-nct.der",
             ]
         )) +
         [
