@@ -650,8 +650,8 @@ tests = [
     "blake2b",
     "blake2s",
     # "compress", # Requires libz.
-    # "pkcs7encrypted", # The C file pkcs7.c causes an error.
-    # "pkcs7compressed", # The C file pkcs7.c causes an error.
+    "pkcs7encrypted",
+    # "pkcs7compressed", # Requires libz.
     "pkcs7signed",
     "pkcs7enveloped",
     "pkcs7authenveloped",

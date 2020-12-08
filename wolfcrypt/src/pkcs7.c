@@ -214,7 +214,9 @@ static int wc_PKCS7_GrowStream(PKCS7* pkcs7, word32 newSz)
     if (pt == NULL) {
         return MEMORY_E;
     }
-    XMEMCPY(pt, pkcs7->stream->buffer, pkcs7->stream->bufferSz);
+    if (pkcs7->stream->bufferSz != 0) {
+        XMEMCPY(pt, pkcs7->stream->buffer, pkcs7->stream->bufferSz);
+    }
 
 #ifdef WC_PKCS7_STREAM_DEBUG
     printf("PKCS7 increasing internal stream buffer %d -> %d\n",
