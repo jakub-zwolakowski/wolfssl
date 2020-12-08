@@ -18503,7 +18503,7 @@ static int pkcs12_test(void)
         return -9101;
 
 #ifdef __TRUSTINSOFT_ANALYZER__
-    iterations = 125;
+    iterations = 1000; /* Changing this breaks the test result. */
 #else
     iterations = 1000;
 #endif
@@ -18530,7 +18530,7 @@ static int pbkdf2_test(void)
     char passwd[] = "passwordpassword";
     static const byte salt[] = { 0x78, 0x57, 0x8E, 0x5a, 0x5d, 0x63, 0xcb, 0x06 };
 #ifdef __TRUSTINSOFT_ANALYZER__
-    int   iterations = 32;
+    int   iterations = 2048; /* Changing this breaks the test result. */
 #else
     int   iterations = 2048;
 #endif
