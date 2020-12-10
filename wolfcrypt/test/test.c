@@ -15692,6 +15692,10 @@ static int dsa_test(void)
 
     wc_FreeDsaKey(&key);
 
+#ifdef __TRUSTINSOFT_ANALYZER__
+    return 0;
+#endif
+
 #ifdef WOLFSSL_KEY_GEN
     {
     byte*  der;
