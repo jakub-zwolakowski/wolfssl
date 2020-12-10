@@ -372,6 +372,7 @@ def make_common_config():
                 "client-ecc-cert.der",
                 "client-key.der",
                 "dh2048.der",
+                "dsa2048.der",
                 "ecc-client-key.der",
                 "server-cert.der",
                 "server-cert.pem",
